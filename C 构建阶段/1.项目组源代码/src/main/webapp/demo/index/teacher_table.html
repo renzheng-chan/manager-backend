@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/course_table.css">
+  <link type = "text/css" rel="stylesheet" href="./layui/css/layui.css">
+</head>
+<body>
+
+  <div>
+    <fieldset class="layui-elem-field">
+        <legend> <i class="layui-icon layui-icon-chart-screen"></i>本学期课表</legend>
+        <div class="class_schedule" style="margin: 30px auto"></div>
+        <h3 class="course_remind">课程表时间发生冲突,以下课表数据不再准确！</h3>
+          <table class = "tableCourse">
+            <tbody>
+              <tr class="headCourse">
+                <th class="th_course"></th>
+                <th class="th_course">周一</th>
+                <th class="th_course">周二</th>
+                <th class="th_course">周三</th>
+                <th class="th_course">周四</th>
+                <th class="th_course">周五</th>
+                <th class="th_course">周六</th>
+                <th class="th_course">周天</th>
+              </tr>
+    
+              <tr class="j1">
+                <th class="th_course">1</th>
+                <td id = "w1_j1" class="td_course"></td>
+                <td id = "w2_j1" class="td_course"></td>
+                <td id = "w3_j1" class="td_course"></td>
+                <td id = "w4_j1" class="td_course"></td>
+                <td id = "w5_j1" class="td_course"></td>
+                <td id = "w6_j1" class="td_course"></td>
+                <td id = "w7_j1" class="td_course"></td>
+                
+              </tr>
+              
+              <tr class="j2">
+                <th class="th_course">2</th>
+                <td id = "w1_j2" class="td_course"></td>
+                <td id = "w2_j2" class="td_course"></td>
+                <td id = "w3_j2" class="td_course"></td>
+                <td id = "w4_j2" class="td_course"></td>
+                <td id = "w5_j2" class="td_course"></td>
+                <td id = "w6_j2" class="td_course"></td>
+                <td id = "w7_j2" class="td_course"></td>
+              </tr>
+    
+              <tr class="j3">
+                <th class="th_course">3</th>
+                <td id = "w1_j3" class="td_course"></td>
+                <td id = "w2_j3" class="td_course"></td>
+                <td id = "w3_j3" class="td_course"></td>
+                <td id = "w4_j3" class="td_course"></td>
+                <td id = "w5_j3" class="td_course"></td>
+                <td id = "w6_j3" class="td_course"></td>
+                <td id = "w7_j3" class="td_course"></td>
+              </tr>
+    
+              <tr class="j4">
+                <th class="th_course">4</th>
+                <td id = "w1_j4" class="td_course"></td>
+                <td id = "w2_j4" class="td_course"></td>
+                <td id = "w3_j4" class="td_course"></td>
+                <td id = "w4_j4" class="td_course"></td>
+                <td id = "w5_j4" class="td_course"></td>
+                <td id = "w6_j4" class="td_course"></td>
+                <td id = "w7_j4" class="td_course"></td>
+              </tr>
+    
+              <tr class="j5">
+                <th class="th_course">5</th>
+                <td id = "w1_j5" class="td_course"></td>
+                <td id = "w2_j5" class="td_course"></td>
+                <td id = "w3_j5" class="td_course"></td>
+                <td id = "w4_j5" class="td_course"></td>
+                <td id = "w5_j5" class="td_course"></td>
+                <td id = "w6_j5" class="td_course"></td>
+                <td id = "w7_j5" class="td_course"></td>
+              </tr>
+    
+              <tr class="j6">
+                <th class="th_course">6</th>
+                <td id = "w1_j6" class="td_course"></td>
+                <td id = "w2_j6" class="td_course"></td>
+                <td id = "w3_j6" class="td_course"></td>
+                <td id = "w4_j6" class="td_course"></td>
+                <td id = "w5_j6" class="td_course"></td>
+                <td id = "w6_j6" class="td_course"></td>
+                <td id = "w7_j6" class="td_course"></td>
+              </tr>
+    
+              <tr class="j7">
+                <th class="th_course">7</th>
+                <td id = "w1_j7" class="td_course"></td>
+                <td id = "w2_j7" class="td_course"></td>
+                <td id = "w3_j7" class="td_course"></td>
+                <td id = "w4_j7" class="td_course"></td>
+                <td id = "w5_j7" class="td_course"></td>
+                <td id = "w6_j7" class="td_course"></td>
+                <td id = "w7_j7" class="td_course"></td>
+              </tr>
+    
+              <tr class="j8">
+                <th class="th_course">8</th>
+                <td id = "w1_j8" class="td_course"></td>
+                <td id = "w2_j8" class="td_course"></td>
+                <td id = "w3_j8" class="td_course"></td>
+                <td id = "w4_j8" class="td_course"></td>
+                <td id = "w5_j8" class="td_course"></td>
+                <td id = "w6_j8" class="td_course"></td>
+                <td id = "w7_j8" class="td_course"></td>
+              </tr>
+    
+              <tr class="j9">
+                <th class="th_course">9</th>
+                <td id = "w1_j9" class="td_course"></td>
+                <td id = "w2_j9" class="td_course"></td>
+                <td id = "w3_j9" class="td_course"></td>
+                <td id = "w4_j9" class="td_course"></td>
+                <td id = "w5_j9" class="td_course"></td>
+                <td id = "w6_j9" class="td_course"></td>
+                <td id = "w7_j9" class="td_course"></td>
+              </tr>
+
+              <tr class="j10">
+                <th class="th_course">10</th>
+                <td id = "w1_j10" class="td_course"></td>
+                <td id = "w2_j10" class="td_course"></td>
+                <td id = "w3_j10" class="td_course"></td>
+                <td id = "w4_j10" class="td_course"></td>
+                <td id = "w5_j10" class="td_course"></td>
+                <td id = "w6_j10" class="td_course"></td>
+                <td id = "w7_j10" class="td_course"></td>
+              </tr>
+    
+              <tr class="j11">
+                <th class="th_course">11</th>
+                <td id = "w1_j11" class="td_course"></td>
+                <td id = "w2_j11" class="td_course"></td>
+                <td id = "w3_j11" class="td_course"></td>
+                <td id = "w4_j11" class="td_course"></td>
+                <td id = "w5_j11" class="td_course"></td>
+                <td id = "w6_j11" class="td_course"></td>
+                <td id = "w7_j11" class="td_course"></td>
+              </tr>
+
+              <tr class="j11">
+                <th class="th_course">11</th>
+                <td id = "w1_j11" class="td_course"></td>
+                <td id = "w2_j11" class="td_course"></td>
+                <td id = "w3_j11" class="td_course"></td>
+                <td id = "w4_j11" class="td_course"></td>
+                <td id = "w5_j11" class="td_course"></td>
+                <td id = "w6_j11" class="td_course"></td>
+                <td id = "w7_j11" class="td_course"></td>
+              </tr>
+
+              <tr class="j12">
+                <th class="th_course">12</th>
+                <td id = "w1_j12" class="td_course"></td>
+                <td id = "w2_j12" class="td_course"></td>
+                <td id = "w3_j12" class="td_course"></td>
+                <td id = "w4_j12" class="td_course"></td>
+                <td id = "w5_j12" class="td_course"></td>
+                <td id = "w6_j12" class="td_course"></td>
+                <td id = "w7_j12" class="td_course"></td>
+              </tr>
+    
+            </tbody>
+          </table>
+      </fieldset>
+</div>
+
+  
+
+
+<script src="./layui/layui.js"></script>
+<script type="text/javascript" src="JQUERY/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="JQUERY/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="JQUERY/jquery.serializeObject.js"></script>
+
+<script>
+   
+// var data = [
+//     {
+//         courseID: "R0101",
+//         courseName: "毛泽东思想和中国特色社会主义理论体系概论",
+//         teacherName: "任XX",
+//         SJDD: "星期一3-5节,江安综合楼C座405;",
+//     },
+//     {
+//         courseID: "R0101",
+//         courseName: "中国近现代史纲要",
+//         teacherName: "李X",
+//         SJDD: "星期二6-7节,江安一教B座302;..星期四1-2节,二基楼B座301;",
+//     },
+//     {
+//         courseID: "R0199",
+//         courseName: "管理信息系统",
+//         teacherName: "王XX",
+//         SJDD: "星期一6-7节,文科楼C座306;..星期四8-9节,文科楼D座405;..星期五1-2节,文科楼A座606;",
+//     }
+// ];
+    
+
+$(document).ready(function(){
+      $.ajax({
+        url:"/teacherservlet.do",
+        dataType:"json",
+        type:"post",
+        data: {opt:"getTimetable"},
+        success: function(list) {
+          alert(list[0].message)
+          if (list != null) {
+              console.log(list);
+              var json={
+
+              }
+            classSchedule(list);
+          }
+        },
+        error:function(list){
+          alert(list[0].message)}
+        
+    })
+
+})
+
+// classSchedule(data);
+
+
+  function classSchedule(data){
+    // data = JSON.parse(data);
+    record = "";
+    var temp;
+    var id;
+    var lesson;
+    var teacher;
+    var date;
+    for (var i = 0; i < data.length; i++) {
+        temp = data[i];
+        id = temp.courseID;
+        lesson = temp.courseName;
+        teacher = "123";
+        console.log(temp.SJDD);
+        temp.SJDD +=";";
+        console.log(temp.SJDD);
+        date = resolveDate(temp.SJDD);
+        console.log("准备进入addHtml");
+        console.log(date);
+        addHtml(id,lesson,teacher,date);
+    }
+  }
+
+  //自定义记录解析完的上课时间,地点的类
+  function ReDate(week, timeBegin, timeEnd, location) {
+    this.week = week;
+    this.timeBegin = timeBegin;
+    this.timeEnd = timeEnd;
+    this.location = location;
+}
+
+//数据样例
+//"周二6-8节,普洱善御楼1-02;..周四1-2节,普洱尚射楼3-01;"
+//根据课程时间、地点信息的数据解析出每一项结果
+function resolveDate(date) {
+    date = date.split(";");//拆分每一个课程信息
+    var reDate = new Array();//存放解析完的数据对象
+    //"周二6-8节,普洱善御楼1-02"
+    for (var i = 0; i < date.length - 1; i++) {
+        // alert("d="+date[i]);
+        var temp = date[i].split(",");
+        // alert("temp="+temp);
+        if (i == 0) {
+            week = temp[0].substr(2, 1);
+        } else {
+            week = temp[0].substr(2, 2);
+        }
+        week = resolveWeek(week);
+        var patt = /\d{1,2}[-]{1}\d{1,2}/;
+        var time = patt.exec(temp[0]);
+        // alert("time="+time);
+        time = time[0].toString().split("-");
+        reDate[i] = new ReDate(week, time[0], time[1], temp[1]);
+    }
+    return reDate;
+}
+
+
+  //根据周信息解析出对应代码
+function resolveWeek(week) {
+    switch (week) {
+        case "一": week = "1"; break;
+        case "二": week = "2"; break;
+        case "三": week = "3"; break;
+        case "四": week = "4"; break;
+        case "五": week = "5"; break;
+        case "六": week = "6"; break;
+        case "日": week = "7"; break;
+    }
+    return week;
+}
+
+
+var record = "";//记录课程冲突信息
+
+//把对应数据添加到课程表里
+//课程代码，课程名称，教师，周，开始时间，结束时间，位置
+//问题：可能存在课程冲突情况
+function addHtml(id, lesson, teacher, date) {
+    console.log(id);
+    console.log(lesson);
+    console.log(teacher);
+    console.log(date);
+    var temp;
+    for (var i = 0; i < date.length; i++) {
+        temp = date[i];
+        var l = $("#w" + temp.week + "_j" + temp.timeBegin);
+        if (l.length > 0 && l[0].innerText == "") {
+            //在表格中加入课程数据
+
+            l.html("<span class='course_id'>" + id + "</span> <span class='course_lesson'>" +
+                lesson + "</span><br><span class='course_teacher'>"
+                + teacher + "</span><br>" + "<span class='course_location' >" +
+                temp.location + "</span>"
+            );
+        } else {
+            //说明该位置已经被其它课程占用，在冲突位置或者被合并位置
+            //循环往上找到冲突信息所在位置
+            var temp2;
+            for (var j = temp.timeEnd; j > 0; j--) {
+                temp2 = $("#w" + temp.week + "_j" + j);
+                if (temp2[0] != null && temp2.text() != "") {
+                    //添加原课程冲突信息
+                    record += "<br>【《 " + temp2.children('.course_id').text() + " " + temp2.children('.course_lesson').text() + " " + temp2.children('.course_teacher').text() + " 》";
+                    //添加现课程冲突信息
+                    record += "和《 " + id + " " + lesson + " " + teacher + " 》】";
+                }
+            }
+            //退出该层循环
+            continue;
+        }
+
+        var s = temp.timeEnd - temp.timeBegin;
+        //合并单元格
+        l.attr('rowspan', s + 1);
+        var object;//元素对象
+        var token = false;//标记合并单元格时是否会有冲突：【false】没有时间冲突，【true】有时间冲突
+        for (var j = 1; j <= s; j++) {
+            object = $("#w" + temp.week + "_j" + (Number.parseInt(temp.timeBegin) + j));
+            //该元素要合并的单元格所在的元素存在 并且元素的内容为空，则不冲突
+            if (object.length > 0 && object[0].innerText == "") {
+                object.remove();
+            } else if (object.length > 0) {
+                //若要合并的元素存在，但是内容不为空，则也冲突
+                token = true;
+                //记录冲突课程信息
+                record += "<br>【《 " + object.children('.course_id').text() + " " + object.children('.course_lesson').text() + " " + object.children('.course_teacher').text() + " 》";
+                //添加现课程冲突信息
+                record += "《 " + id + " " + lesson + " " + teacher + " 》】";
+                object.remove();
+            }
+            else {
+                //上面删除冲突的信息后
+                //可能存在单元格不存在的情况
+                token = true;
+            }
+        }
+        //有冲突则记录，并删除冲突的信息
+        //这样删除有数据的单元格可能存在空缺的单元格
+        //所有需要把空缺的单元格找回
+        if (token == true) {
+            //把丢失的单元格补充回来
+            //往下循环看丢失的格子并找回
+            var end = Number.parseInt(temp.timeEnd);
+            for (var j = 13; j > end; j--) {
+                object = $("#w" + temp.week + "_j" + (Number.parseInt(temp.timeEnd) + j));
+                if (object.length == 0) {
+                    var obj;
+                    //循环找到丢失元素之前的元素
+                    for (var k = Number.parseInt(week); k > 0; k--) {
+                        obj = $("#w" + k + "_j" + (Number.parseInt(temp.timeEnd) + j));
+                        //若找到则在元素之后添加丢失的元素，没找到则继续循环向前找
+                        if (obj.length > 0) {
+                            obj.after("<td id='w" + temp.week + "_j" + (Number.parseInt(temp.timeEnd) + j) + "'></td>");
+                            break;
+                        }
+                    }
+                } else {
+                    //若该元素之下的第一个
+                    break;
+                }
+            }
+            token = false;
+        }
+    }
+}
+
+
+
+
+
+</script>
+</body>
+</html>

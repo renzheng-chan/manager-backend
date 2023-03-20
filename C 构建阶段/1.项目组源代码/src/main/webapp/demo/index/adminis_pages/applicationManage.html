@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>批复申请</title>
+    <link href="./bootstrap.min.css" rel="stylesheet"/>
+    <link href="./批复申请页面.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="./layui-v2.6.8/layui-v2.6.8/layui/css/layui.css">
+</head>
+<body>
+<script src="./jquery/jquery-1.12.4.min.js"></script>
+<script src="./jquery/jquery.serializeObject.js"></script>
+<script src="./layui-v2.6.8/layui-v2.6.8/layui/layui.js"></script>
+
+<header id="nav-1" role="banner">
+  <div class="container">
+    <div class="header-inner">
+      <h1>
+        <img src="https://template-1253409072.cos.ap-guangzhou.myqcloud.com/2022/03/logo-small-svg.svg"  itemprop="logo" class="custom-logo"/>
+      </h1>
+
+      <nav role="navigation">
+        <ul>
+          <li>
+            <a href="./Manager.html">首页</a>
+          </li>
+          <li>
+            <button class="layui-btn layui-btn-primary demo1" id="downDropButton">
+              班级/课程查看
+              <i class="layui-icon layui-icon-down layui-font-12"></i>
+            </button>
+          </li>
+          <li>
+            <a href="stuManage.html">学生管理</a>
+          </li>
+          <li>
+            <a href="courseManage.html">课程管理</a>
+          </li>
+          <li>
+            <a href="teacherInfoManage.html">教师管理</a>
+          </li>
+          <li>
+            <a href="giveNotice.html">发送通知</a>
+          </li>
+          <li>
+            <a href="./applicationManage.html" id="response">批复申请</a>
+          </li>
+          <li>
+            <a href="http://localhost:8080/exit">退出登录</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div>
+  <ul class="layui-timeline" id="timeline"></ul>
+</div>
+
+<script>
+  $.ajax({
+    type:'get',
+    url: '/showApplication',
+    dataType:'json',
+    success:function(res){
+      var head = '';
+      $.each(res,function(index,item){
+        var applicationID = item['approvalID'];
+        console.log(item['approvalID']);
+        head += '<li class="layui-timeline-item"><i class="layui-icon layui-timeline-axis">&#xe63f;</i><div class="layui-timeline-content layui-text">'+'<h3 class="layui-timeline-title">'+"申请时间："+item['applicationTime']+'</h3>'+'<p id="applicantName">'+"申请人："+item['applicantName']+'</p>'+`<a href="#" id="title" onclick="forward(${applicationID})">${item['applicationTitle']}</a>`+'<p id="state">'+"是否审批："+item['approvalState']+'</p>'+'</div></li>'
+      })
+        console.log(head);
+      window.onload = function(){
+        document.getElementById("timeline").innerHTML = head;
+      }
+    },
+    error:function(){
+      alert("出错啦")
+    }
+  })
+</script>
+
+<script>
+    function SetCookie(cookieName,cookieValue) {
+         /*设置Cookie值*/
+         document.cookie = cookieName + "=" + escape(cookieValue)
+     }
+     var forward = function(applicationID){
+       SetCookie("applicationID",applicationID);
+       document.location = './点击申请跳转页面.html';
+     }
+ </script>
+
+<script>
+    layui.use(['dropdown', 'util', 'layer', 'table'], function(){
+    var dropdown = layui.dropdown
+    ,util = layui.util
+    ,layer = layui.layer
+    ,table = layui.table
+    ,$ = layui.jquery;
+  
+      dropdown.render({
+        elem: '#downDropButton'
+        ,data: [{
+          title: '查看课程'
+          ,id: "course_check"
+          ,href:"./查看课程页面.html"
+        },{
+          title: '查看班级'
+          ,id: "room_check"
+          ,href: "./查看班级页面.html"
+        }]
+      });
+    })
+</script>
+
+
+</body>
+</html>

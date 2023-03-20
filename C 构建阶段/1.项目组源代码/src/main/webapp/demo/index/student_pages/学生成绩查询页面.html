@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>成绩查询</title>
+    <link rel="stylesheet" href="./layui-v2.6.8/layui-v2.6.8/layui/css/layui.css">
+    <link href="./bootstrap.min.css" rel="stylesheet"/>
+    <link href="学生成绩查询页面.css" rel="stylesheet"/>
+
+</head>
+<body>
+<script type="text/javascript" src="./layui-v2.6.8/layui-v2.6.8/layui/layui.js"></script>
+<script type="text/javascript" src="./jquery/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="./jquery/jquery.serializeObject.js"></script>
+<header id="nav-1" role="banner">
+  <div class="container">
+    <div class="header-inner">
+      <h1>
+        <img src="https://template-1253409072.cos.ap-guangzhou.myqcloud.com/2022/03/logo-small-svg.svg"  itemprop="logo" class="custom-logo"/>
+      </h1>
+
+
+    </div>
+  </div>
+</header>
+
+<table class="layui-table" id="table"></table>
+
+<script type="text/javascript">
+  $.ajax({
+    type: "get",
+    url: "/stuIndex",
+    data:{
+      opt:"getStuScore"
+    },
+    dataType: "json",
+    success: function(data){
+      var result = "<thead><tr><th>课程号</th><th>课程名</th><th>教师</th><th>分数</th><th>学分</th><th>GPA</th></tr></thead>"
+      $.each(data,function(index,item){
+        result += "<tr><th>"+item['courseID']+"</th><th>"+item['courseName']+"</th><th>"+item['teacherName']+"</th><th>"+item['score']+"</th><th>"+item['courseCredit']+"</th><th>"+item['gpa']+"</th></tr>";
+      })
+      $('#table').append(result)
+    },
+    error: function(data){
+      alert("查询错误")
+    }
+  });
+</script>
+
+</body>
+</html>

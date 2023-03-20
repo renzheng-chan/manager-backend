@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type = "text/css" rel="stylesheet" href="./layui/css/layui.css">
+  <link rel="stylesheet" href="./css/info.css">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+  <fieldset class="layui-elem-field">
+    <legend>关于我的信息</legend>
+    <div class="layui-field-box">
+      <div class="lnfo_first">
+        <p>
+          <i class="layui-icon layui-icon-face-smile layui-icon-about"></i> 教学编号及信息
+        </p>
+        <hr class="layui-border-blue">
+        <div class="info_table">
+          <div class="info_left" >          
+              <div >教师编号</div>
+              <div >教师名字</div>
+              <div >教师年龄</div>
+              <div >教师性别</div>
+              <div >教师入职时间</div>
+              <div >教师职称</div>
+              <div >教师所属学院</div>
+          </div>
+
+          <div class="info_right" >
+            <div id="info_1">2020141461168</div>
+            <div id="info_2">黄拓森</div>
+            <div id="info_3">19</div>
+            <div id="info_4">男</div>
+            <div id="info_5">2022-12-30</div>
+            <div id="info_6">教授</div>
+            <div id="info_7">软件学院</div>
+          </div>
+        </div>
+
+
+        
+      </div>
+    </div>
+
+  </div>
+
+  <fieldset class="layui-elem-field">
+
+  </fieldset>
+  <div class="layui-field-box">
+        <p>
+          <i class="layui-icon  layui-icon-chat"></i> 教籍异动信息
+        </p>
+        <hr class="layui-border-blue">
+  </div>
+  </fieldset>
+  <div style="width: 100%;"><img src="img/change.png" alt="" style="margin-left: 500px;"></div>
+  <div class="layui-anim layui-anim-up layui-anim-loop" style="width: 50px; height:50px;background-color: rgb(244, 44, 44);" ></div>
+  
+
+  <script src="./layui/layui.js"></script>
+    <script type="text/javascript" src="JQUERY/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="JQUERY/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="JQUERY/jquery.serializeObject.js"></script>
+
+    <script>
+      
+      
+      var div1 = document.getElementById("info_1");
+      var div2 = document.getElementById("info_2");
+      var div3 = document.getElementById("info_3");
+      var div4 = document.getElementById("info_4");
+      var div5 = document.getElementById("info_5");
+      var div6 = document.getElementById("info_6");
+      var div7 = document.getElementById("info_7");
+      
+
+
+    
+    $.ajax({
+      url:"/teacherservlet.do",
+      dataType:"json",
+      type:"post",
+      data: {opt:"getPersonalInfo"},
+      success: function(list) {
+        if (list != null) {
+        var teacherID = list.teacherID;
+        var teacherName = list.teacherName;
+        var teacherAge = list.teacherAge;
+        var teacherSex = list.teacherSex;
+        var teacherOBTime = list.teacherOBTime;
+        var teacherTitle = list.teacherTitle;
+        var teacherDept = list.teacherDept;
+        
+        div1.innerText = teacherID;
+        div2.innerText = teacherName;
+        div3.innerText = teacherAge;
+        div4.innerText = teacherSex;
+        div5.innerText = teacherOBTime;
+        div6.innerText = teacherTitle;
+        div7.innerText = teacherDept;
+        }
+      },
+      error: function(){
+        alert("传入失败！");
+      }
+  })
+
+
+
+</script>
+</body>
+</html>

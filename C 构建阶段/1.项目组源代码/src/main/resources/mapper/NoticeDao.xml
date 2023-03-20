@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scu.com.demo.dao.NoticeDao">
+
+    <resultMap type="scu.com.demo.entity.Notice" id="NoticeMap">
+        <result property="noticeid" column="noticeID" jdbcType="INTEGER"/>
+        <result property="noticeinfo" column="noticeInfo" jdbcType="VARCHAR"/>
+        <result property="noticetime" column="noticeTime" jdbcType="VARCHAR"/>
+        <result property="noticetitle" column="noticeTitle" jdbcType="VARCHAR"/>
+        <result property="notifier" column="notifier" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getNotice" resultType="scu.com.demo.entity.Notice">
+        select * from notice
+    </select>
+    <!--查询单个-->
+    <select id="queryById" resultMap="NoticeMap">
+        select
+          noticeID, noticeInfo, noticeTime, noticeTitle, notifier
+        from notice
+        where noticeID = #{noticeid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="NoticeMap">
+        select
+          noticeID, noticeInfo, noticeTime, noticeTitle, notifier
+        from notice
+        <where>
+            <if test="noticeid != null">
+                and noticeID = #{noticeid}
+            </if>
+            <if test="noticeinfo != null and noticeinfo != ''">
+                and noticeInfo = #{noticeinfo}
+            </if>
+            <if test="noticetime != null and noticetime != ''">
+                and noticeTime = #{noticetime}
+            </if>
+            <if test="noticetitle != null and noticetitle != ''">
+                and noticeTitle = #{noticetitle}
+            </if>
+            <if test="notifier != null and notifier != ''">
+                and notifier = #{notifier}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from notice
+        <where>
+            <if test="noticeid != null">
+                and noticeID = #{noticeid}
+            </if>
+            <if test="noticeinfo != null and noticeinfo != ''">
+                and noticeInfo = #{noticeinfo}
+            </if>
+            <if test="noticetime != null and noticetime != ''">
+                and noticeTime = #{noticetime}
+            </if>
+            <if test="noticetitle != null and noticetitle != ''">
+                and noticeTitle = #{noticetitle}
+            </if>
+            <if test="notifier != null and notifier != ''">
+                and notifier = #{notifier}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="noticeid" useGeneratedKeys="true">
+        insert into notice(noticeInfo, noticeTime, noticeTitle, notifier)
+        values (#{noticeinfo}, #{noticetime}, #{noticetitle}, #{notifier})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="noticeid" useGeneratedKeys="true">
+        insert into notice(noticeInfo, noticeTime, noticeTitle, notifier)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.noticeinfo}, #{entity.noticetime}, #{entity.noticetitle}, #{entity.notifier})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="noticeid" useGeneratedKeys="true">
+        insert into notice(noticeInfo, noticeTime, noticeTitle, notifier)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.noticeinfo}, #{entity.noticetime}, #{entity.noticetitle}, #{entity.notifier})
+        </foreach>
+        on duplicate key update
+        noticeInfo = values(noticeInfo),
+        noticeTime = values(noticeTime),
+        noticeTitle = values(noticeTitle),
+        notifier = values(notifier)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update notice
+        <set>
+            <if test="noticeinfo != null and noticeinfo != ''">
+                noticeInfo = #{noticeinfo},
+            </if>
+            <if test="noticetime != null and noticetime != ''">
+                noticeTime = #{noticetime},
+            </if>
+            <if test="noticetitle != null and noticetitle != ''">
+                noticeTitle = #{noticetitle},
+            </if>
+            <if test="notifier != null and notifier != ''">
+                notifier = #{notifier},
+            </if>
+        </set>
+        where noticeID = #{noticeid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from notice where noticeID = #{noticeid}
+    </delete>
+
+</mapper>
+

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scu.com.demo.dao.CourseDao">
+
+    <resultMap type="scu.com.demo.entity.Course" id="CourseMap">
+        <result property="courseid" column="courseID" jdbcType="INTEGER"/>
+        <result property="coursename" column="courseName" jdbcType="VARCHAR"/>
+        <result property="teacherid" column="teacherID" jdbcType="INTEGER"/>
+        <result property="coursecredit" column="courseCredit" jdbcType="INTEGER"/>
+        <result property="courseroom" column="courseRoom" jdbcType="VARCHAR"/>
+        <result property="coursetime" column="courseTime" jdbcType="VARCHAR"/>
+        <result property="coursedescription" column="courseDescription" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getCourseById" resultType="scu.com.demo.entity.Course">
+        select * from course where courseID=#{courseid} and teacherID=#{teacherid}
+    </select>
+    <select id="getCourseById_" resultType="scu.com.demo.entity.Course">
+        select * from course where courseID=#{courseid} and teacherID=#{teacherid}
+    </select>
+
+    <select id="getAll" resultType="scu.com.demo.entity.Course">
+        select * from course where teacherID=#{teacherid}
+    </select>
+    <!--查询单个-->
+    <select id="queryById" resultMap="CourseMap">
+        select
+          courseID, courseName, teacherID, courseCredit, courseRoom, courseTime, courseDescription
+        from course
+        where courseID = #{courseid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="CourseMap">
+        select
+          courseID, courseName, teacherID, courseCredit, courseRoom, courseTime, courseDescription
+        from course
+        <where>
+            <if test="courseid != null">
+                and courseID = #{courseid}
+            </if>
+            <if test="coursename != null and coursename != ''">
+                and courseName = #{coursename}
+            </if>
+            <if test="teacherid != null">
+                and teacherID = #{teacherid}
+            </if>
+            <if test="coursecredit != null">
+                and courseCredit = #{coursecredit}
+            </if>
+            <if test="courseroom != null and courseroom != ''">
+                and courseRoom = #{courseroom}
+            </if>
+            <if test="coursetime != null and coursetime != ''">
+                and courseTime = #{coursetime}
+            </if>
+            <if test="coursedescription != null and coursedescription != ''">
+                and courseDescription = #{coursedescription}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from course
+        <where>
+            <if test="courseid != null">
+                and courseID = #{courseid}
+            </if>
+            <if test="coursename != null and coursename != ''">
+                and courseName = #{coursename}
+            </if>
+            <if test="teacherid != null">
+                and teacherID = #{teacherid}
+            </if>
+            <if test="coursecredit != null">
+                and courseCredit = #{coursecredit}
+            </if>
+            <if test="courseroom != null and courseroom != ''">
+                and courseRoom = #{courseroom}
+            </if>
+            <if test="coursetime != null and coursetime != ''">
+                and courseTime = #{coursetime}
+            </if>
+            <if test="coursedescription != null and coursedescription != ''">
+                and courseDescription = #{coursedescription}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="courseid" useGeneratedKeys="true">
+        insert into course(courseName, teacherID, courseCredit, courseRoom, courseDescription)
+        values (#{coursename}, #{teacherid}, #{coursecredit}, #{courseroom}, #{coursedescription})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="courseid" useGeneratedKeys="true">
+        insert into course(courseName, teacherID, courseCredit, courseRoom, courseDescription)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.coursename}, #{entity.teacherid}, #{entity.coursecredit}, #{entity.courseroom}, #{entity.coursedescription})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="courseid" useGeneratedKeys="true">
+        insert into course(courseName, teacherID, courseCredit, courseRoom, courseDescription)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.coursename}, #{entity.teacherid}, #{entity.coursecredit}, #{entity.courseroom}, #{entity.coursedescription})
+        </foreach>
+        on duplicate key update
+        courseName = values(courseName),
+        teacherID = values(teacherID),
+        courseCredit = values(courseCredit),
+        courseRoom = values(courseRoom),
+        courseDescription = values(courseDescription)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update course
+        <set>
+            <if test="coursename != null and coursename != ''">
+                courseName = #{coursename},
+            </if>
+            <if test="teacherid != null">
+                teacherID = #{teacherid},
+            </if>
+            <if test="coursecredit != null">
+                courseCredit = #{coursecredit},
+            </if>
+            <if test="courseroom != null and courseroom != ''">
+                courseRoom = #{courseroom},
+            </if>
+            <if test="coursedescription != null and coursedescription != ''">
+                courseDescription = #{coursedescription},
+            </if>
+        </set>
+        where courseID = #{courseid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from course where courseID = #{courseid}
+    </delete>
+
+</mapper>
+

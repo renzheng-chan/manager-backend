@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间 对应dao层的名称/完整限定名-->
+<mapper namespace="com.scu.dao.UserDao">
+    <!--测试环境配置-->
+    <select id="getUserById" resultType="com.scu.entity.User">
+        select * from user where userId=#{userId}
+    </select>
+    <select id="login" resultType="com.scu.entity.User" parameterType="User">
+        select * from user where userAccount = #{userAccount} and userPassword = #{userPassword}
+    </select>
+    <select id="getAll" resultType="com.scu.entity.User">
+        select * from user order by userId desc
+    </select>
+    <insert id="addUser">
+        insert into user(userId,authorityId,userAccount,userPassword) values(#{userId},#{authorityId},#{userAccount},#{userPassword})
+    </insert>
+    <!--<update id="revInfo"></update>-->
+</mapper>

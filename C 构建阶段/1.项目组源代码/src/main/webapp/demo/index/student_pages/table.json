@@ -1,0 +1,34 @@
+[{
+    "courseID":810975,
+    "courseName":"数据结构",
+    "courseTime":"周五第一节",
+    "courseCredit":5,
+    "courseRoom":"C105",
+    "teacherName":"somebody",
+    "courseDescription":"this is a description for the course"
+},
+{
+    "courseID":810975,
+    "courseName":"数据结构",
+    "courseTime":"周五第一节",
+    "courseCredit":5,
+    "courseRoom":"C105",
+    "teacherName":"somebody",
+    "courseDescription":"this is a description for the course"
+},{
+    "courseID":810975,
+    "courseName":"数据结构",
+    "courseTime":"周五第一节",
+    "courseCredit":5,
+    "courseRoom":"C105",
+    "teacherName":"somebody",
+    "courseDescription":"this is a description for the course"
+},{
+    "courseID":810975,
+    "courseName":"数据结构",
+    "courseTime":"周五第一节",
+    "courseCredit":5,
+    "courseRoom":"C105",
+    "teacherName":"somebody",
+    "courseDescription":"this is a description for the course"
+}]

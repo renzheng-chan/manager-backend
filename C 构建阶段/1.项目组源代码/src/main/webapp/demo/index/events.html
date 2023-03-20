@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>审批事项</title>
+</head>
+<body>
+<form id="testForm">
+    <input type="text" name="applicationContent" class="applicationContent" placeholder="请输入申请内容:"/>
+    <input type="text" name="applicationTime" class="applicationTime" placeholder="请输入申请时间:"/>
+    <input type="text" name="applicantID" class="applicantID" placeholder="请输入申请人ID:"/>
+    <input type="text" name="applicantName" class="applicantName" placeholder="请输入申请人姓名:"/>
+
+    <button type="button" id="submitTest">上传</button>
+</form>
+</body>
+<script type="text/javascript" src="../static/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../static/jquery.serializeObject.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        //登录
+        $("#submitTest").on("click",function(){
+            //动态获取
+            var applicationContent=$(".applicationContent").val();
+            var applicationTime=$(".applicationTime").val();
+            var applicantID=$(".applicantID").val();
+            var applicantName=$(".applicantName").val();
+            //发起ajax请求
+            $.ajax({
+                url:"/teacherservlet.do",//请求路径既是要访问的servlet的名称相对路径
+                type:"POST",//请求方式默认是get
+                datatype:"JSON",
+                data:{
+                    opt:"sendApproval",
+                    applicationContent:applicationContent,
+                    applicationTime:applicationTime,
+                    applicantID:applicantID,
+                    applicantName:applicantName
+                },//参数域发送给服务器的数据
+                success:function(data){
+                    //请求成功后执行的函数
+                    console.log("success!");
+                    console.log(data);
+
+                    // console.log(data.msg);
+                },
+                error:function(data){
+                    //请求失败后执行的而函数
+                    alert("出错了")
+                }
+            })
+        })
+    })
+</script>
+</html>

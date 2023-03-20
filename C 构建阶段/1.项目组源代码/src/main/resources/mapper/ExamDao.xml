@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scu.com.demo.dao.ExamDao">
+
+    <resultMap type="scu.com.demo.entity.Exam" id="ExamMap">
+        <result property="courseid" column="courseID" jdbcType="INTEGER"/>
+        <result property="examtime" column="examTime" jdbcType="VARCHAR"/>
+        <result property="examroom" column="examRoom" jdbcType="VARCHAR"/>
+        <result property="examseat" column="examSeat" jdbcType="INTEGER"/>
+        <result property="stuid" column="stuID" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ExamMap">
+        select
+          courseID, examTime, examRoom, examSeat, stuID
+        from exam
+        where courseID = #{courseid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ExamMap">
+        select
+          courseID, examTime, examRoom, examSeat, stuID
+        from exam
+        <where>
+            <if test="courseid != null">
+                and courseID = #{courseid}
+            </if>
+            <if test="examtime != null and examtime != ''">
+                and examTime = #{examtime}
+            </if>
+            <if test="examroom != null and examroom != ''">
+                and examRoom = #{examroom}
+            </if>
+            <if test="examseat != null">
+                and examSeat = #{examseat}
+            </if>
+            <if test="stuid != null">
+                and stuID = #{stuid}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from exam
+        <where>
+            <if test="courseid != null">
+                and courseID = #{courseid}
+            </if>
+            <if test="examtime != null and examtime != ''">
+                and examTime = #{examtime}
+            </if>
+            <if test="examroom != null and examroom != ''">
+                and examRoom = #{examroom}
+            </if>
+            <if test="examseat != null">
+                and examSeat = #{examseat}
+            </if>
+            <if test="stuid != null">
+                and stuID = #{stuid}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="courseid" useGeneratedKeys="true">
+        insert into exam(examTime, examRoom, examSeat)
+        values (#{examtime}, #{examroom}, #{examseat})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="courseid" useGeneratedKeys="true">
+        insert into exam(examTime, examRoom, examSeat)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.examtime}, #{entity.examroom}, #{entity.examseat})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="courseid" useGeneratedKeys="true">
+        insert into exam(examTime, examRoom, examSeat)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.examtime}, #{entity.examroom}, #{entity.examseat})
+        </foreach>
+        on duplicate key update
+        examTime = values(examTime),
+        examRoom = values(examRoom),
+        examSeat = values(examSeat)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update exam
+        <set>
+            <if test="examtime != null and examtime != ''">
+                examTime = #{examtime},
+            </if>
+            <if test="examroom != null and examroom != ''">
+                examRoom = #{examroom},
+            </if>
+            <if test="examseat != null">
+                examSeat = #{examseat},
+            </if>
+        </set>
+        where courseID = #{courseid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from exam where courseID = #{courseid}
+    </delete>
+
+</mapper>
+

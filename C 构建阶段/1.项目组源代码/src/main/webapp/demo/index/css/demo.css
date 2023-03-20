@@ -1,0 +1,21 @@
+ /* #div1 {
+    background-color: rgb(255, 255, 255);
+    width: 200px;
+    height: 200px;
+ } */
+
+
+ .main{
+    width: 500px;
+    margin:0 auto;
+    text-align: center;
+ }
+ #table{
+    display: inline-block;
+    vertical-align: top;
+    border-collapse:collapse;
+ }
+ tr td{
+      width:200px;
+      border: 1px solid gray;
+ }

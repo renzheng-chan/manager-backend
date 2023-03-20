@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生成绩表</title>
+</head>
+<body>
+<form id="testForm">
+    <input type="text" name="courseID" class="courseID" placeholder="请输入课程id:"/>
+    <button type="button" id="submitTest">查询</button>
+</form>
+</body>
+<script type="text/javascript" src="../static/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../static/jquery.serializeObject.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        //登录
+        $("#submitTest").on("click",function(){
+            //动态获取
+            var courseId=$(".courseID").val();
+            //发起ajax请求
+            $.ajax({
+                url:"/teacherservlet.do",//请求路径既是要访问的servlet的名称相对路径
+                type:"POST",//请求方式默认是get
+                datatype:"JSON",
+                data:{
+                    opt:"getStuScore",
+                    courseID:courseId
+                },//参数域发送给服务器的数据
+                success:function(data){
+                    //请求成功后执行的函数
+                    console.log("success!");
+                    console.log(data);
+                },
+                error:function(data){
+                    //请求失败后执行的而函数
+                    alert("出错了")
+                }
+            })
+        })
+    })
+</script>
+</html>

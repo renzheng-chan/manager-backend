@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <welcome-file-list>
+    <welcome-file>/demo/login/login.html</welcome-file>
+  </welcome-file-list>
+    <filter>
+        <filter-name>accessControl</filter-name>
+        <filter-class>scu.com.demo.filter.FilterAccess</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>accessControl</filter-name>
+        <url-pattern>/demo/index/*</url-pattern>
+    </filter-mapping>
+
+
+    <!--<servlet>-->
+        <!--<servlet-name>Global</servlet-name>-->
+        <!--<servlet-class>scu.com.demo.servlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>Global</servlet-name>-->
+        <!--<url-pattern>*.do</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+        <!--<servlet-name>servlet.do</servlet-name>-->
+        <!--<servlet-class>scu.com.demo.servlet.Servlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>servlet.do</servlet-name>-->
+        <!--<url-pattern>servlet.do</url-pattern>-->
+    <!--</servlet-mapping>-->
+</web-app>

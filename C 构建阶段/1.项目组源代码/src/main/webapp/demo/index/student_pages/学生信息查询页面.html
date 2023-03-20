@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>个人信息</title>
+    <link href="./bootstrap.min.css" rel="stylesheet"/>
+    <link href="./学生信息查询页面.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="./layui-v2.6.8/layui-v2.6.8/layui/css/layui.css">
+</head>
+<body>
+  <script src="./jquery/jquery-1.12.4.min.js"></script>
+  <script src="./jquery/jquery.serializeObject.js"></script>
+  <script src="./layui-v2.6.8/layui-v2.6.8/layui/layui.js"></script>
+
+<header id="nav-1" role="banner">
+  <div class="container">
+    <div class="header-inner">
+      <h1>
+        <img src="https://template-1253409072.cos.ap-guangzhou.myqcloud.com/2022/03/logo-small-svg.svg"  itemprop="logo" class="custom-logo"/>
+      </h1>
+
+
+    </div>
+  </div>
+</header>
+
+<table class="layui-table" id="table"></table>
+
+<script>
+    $.ajax({
+      type: "get",
+      url:"/stuIndex",
+      data:{
+        opt:"getStuInfo"
+      },
+      dataType:"json",
+      success:function(data){
+        var result = "<thead><tr><th>学号</th><th>姓名</th><th>性别</th><th>年龄</th><th>班级</th><th>年级</th><th>学院</th><th>入学时间</th></tr></thead>"
+        $.each(data,function(index,item){
+          result += "<tr><th>"+item['stuID']+"</th><th>"+item['stuName']+"</th><th>"+item['stuSex']+"</th><th>"+item['stuAge']+"</th><th>"+item['classID']+"</th><th>"+item['stuGrade']+"</th><th>"+item['stuDept']+"</th><th>"+item['stuADTime']+"</th><th>"+"</th></tr>";
+        })
+        $('#table').append(result)
+      },
+      error:function(){
+        alert("查询出错")
+      }
+    })
+  </script>
+
+</body>
+
+</html>

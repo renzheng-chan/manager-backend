@@ -1,0 +1,41 @@
+[{
+    "teacherID":166,
+    "teacherName":"teacher12",
+    "courseID":12,
+    "courseName":"course15",
+    "courseDay":2,
+    "courseNum":6,
+    "courseCredit":5,
+    "courseRoom":"C203",
+    "courseDescription":"this is a description for the course"
+},{
+    "teacherID":166,
+    "teacherName":"teacher12",
+    "courseID":12,
+    "courseName":"course15",
+    "courseDay":2,
+    "courseNum":6,
+    "courseCredit":5,
+    "courseRoom":"C203",
+    "courseDescription":"this is a description for the course"
+},{
+    "teacherID":166,
+    "teacherName":"teacher12",
+    "courseID":12,
+    "courseName":"course15",
+    "courseDay":2,
+    "courseNum":6,
+    "courseCredit":5,
+    "courseRoom":"C203",
+    "courseDescription":"this is a description for the course"
+},{
+    "teacherID":166,
+    "teacherName":"teacher12",
+    "courseID":12,
+    "courseName":"course15",
+    "courseDay":2,
+    "courseNum":6,
+    "courseCredit":5,
+    "courseRoom":"C203",
+    "courseDescription":"this is a description for the course"
+}]

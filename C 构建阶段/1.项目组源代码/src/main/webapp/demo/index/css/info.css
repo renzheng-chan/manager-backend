@@ -1,0 +1,42 @@
+.info_left{
+    float: left;
+}
+
+.info_left > div, .info_right > div {
+    font-size: 18px;
+    line-height: 30px;
+    padding: 2px;
+    text-align: center;
+    width: 300px;
+    height: 30px;
+    border-style: dashed;
+    border-width: 1px;
+    border-color: rgb(238, 243, 244);
+    background-color: rgb(238, 243, 244);
+    
+}
+
+.info_right{
+    float: left;
+}
+
+
+.info_left > div{
+    font-size: 18px;
+    border-style: solid;
+    border-color: rgb(171, 209, 225);
+}
+.info_right > div{
+    width: 500px;
+    border-style: dashed;
+    border-color: rgb(164, 196, 204);
+    background-color: rgb(255, 255, 255);
+}
+
+.info_table{
+    float: left;
+    border-style: solid;
+    border-color: rgb(142, 185, 249);
+    margin: 50px 210px;
+    
+}

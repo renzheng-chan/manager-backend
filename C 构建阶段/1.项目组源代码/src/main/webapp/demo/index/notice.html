@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>通知</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript" src="../static/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../static/jquery.serializeObject.js"></script>
+<script type="text/javascript">
+    window.onload=function(){
+        console.log("进入通知页面！");
+        //发起ajax请求
+        $.ajax({
+            url:"/teacherservlet.do",//请求路径既是要访问的servlet的名称相对路径
+            type:"POST",//请求方式默认是get
+            datatype:"JSON",
+            data:{
+                opt:"getNotice",
+            },//参数域发送给服务器的数据
+            success:function(data){
+                //请求成功后执行的函数
+                console.log("success!");
+                console.log(data);
+            },
+            error:function(data){
+                //请求失败后执行的而函数
+                console.log(data)
+                alert("出错了")
+            }
+        })
+    }
+</script>
+</html>

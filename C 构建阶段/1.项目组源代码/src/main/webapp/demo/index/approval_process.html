@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./layui/css/layui.css">
+</head>
+<body>
+<fieldset class="layui-elem-field">
+    <legend><i class="layui-icon layui-icon-survey"></i>  审批流程</legend>
+    <div id = "approval_form" style="width: 800px;margin:0 auto">
+    
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+          <label class="layui-form-label">申请人</label>
+          <div class="layui-input-block">
+            <input id = "applicantName" type="text" name="applicantName" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">申请时间</label>
+          <div class="layui-input-inline">
+            <input type="date" id = "application_time" name="application_time" required lay-verify="required" placeholder="请输入申请时间" autocomplete="off" class="layui-input">
+          </div>
+          <div class="layui-form-mid layui-word-aux">以学校规定格式:yyyy-mm-dd</div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">所属学院</label>
+          <div class="layui-input-block">
+            <select name="city" lay-verify="required">
+              <option value=""></option>
+              <option value="0">软件学院</option>
+              <option value="1">计算机学院</option>
+              <option value="2">经济学院</option>
+              <option value="3">创新创业学院</option>
+              <option value="4">物理学院</option>
+            </select>
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">申请类型</label>
+          <div class="layui-input-block">
+            <input type="checkbox" name="like[write]" title="请假">
+            <input type="checkbox" name="like[read]" title="问题&建议" checked>
+            <input type="checkbox" name="like[dai]" title="晋升">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">A</label>
+          <div class="layui-input-block">
+            <input type="checkbox" name="switch" lay-skin="switch">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">是否在职</label>
+          <div class="layui-input-block">
+            <input type="radio" name="sex" value="男" title="在职员工">
+            <input type="radio" name="sex" value="女" title="已经退休" checked>
+          </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+          <label class="layui-form-label">申请内容</label>
+          <div class="layui-input-block">
+            <textarea  id = "applicant_content" name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo" id = "value_submit">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+</fieldset>
+
+      <!-- 导入script包 -->
+      <script src="./layui/layui.js"></script>
+      <script type="text/javascript" src="JQUERY/jquery-1.12.4.js"></script>
+      <script type="text/javascript" src="JQUERY/jquery-1.12.4.min.js"></script>
+      <script type="text/javascript" src="JQUERY/jquery.serializeObject.js"></script>
+
+
+       
+      <script>
+      //Demo
+      layui.use('form', function(){
+        var form = layui.form;
+        
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+          layer.msg(JSON.stringify(data.field));
+          return false;
+        });
+      });
+
+      // 传出数据到后端
+
+      $(document).ready(function(){
+        $("#value_submit").click(function(){
+      var application_time = document.getElementById("application_time").value;
+      var applicantName = document.getElementById("applicantName").value;
+      var applicant_content = document.getElementById("applicant_content").value;
+      console.log(application_time,applicantName,applicant_content);
+
+      $.ajax({
+        url:"/teacherservlet.do",
+        dataType:"json",
+        type:"post",
+        data:{applicationContent:applicant_content,applicationTime:application_time,applicantName:applicantName,opt:"sendApproval"},
+        success: function() {
+          alert("成功提交申请！申请会在三天内返回结果！")
+          }
+        })
+    
+
+
+  })
+})
+      </script>
+</body>
+</html>

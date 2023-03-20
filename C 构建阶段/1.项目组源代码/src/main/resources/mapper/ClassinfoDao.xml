@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scu.com.demo.dao.ClassinfoDao">
+
+    <resultMap type="scu.com.demo.entity.Classinfo" id="ClassinfoMap">
+        <result property="classid" column="classID" jdbcType="INTEGER"/>
+        <result property="grade" column="grade" jdbcType="INTEGER"/>
+        <result property="stuid" column="stuID" jdbcType="INTEGER"/>
+        <result property="teacherid" column="teacherID" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ClassinfoMap">
+        select
+          classID, grade, stuID, teacherID
+        from classinfo
+        where classID = #{classid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ClassinfoMap">
+        select
+          classID, grade, stuID, teacherID
+        from classinfo
+        <where>
+            <if test="classid != null">
+                and classID = #{classid}
+            </if>
+            <if test="grade != null">
+                and grade = #{grade}
+            </if>
+            <if test="stuid != null">
+                and stuID = #{stuid}
+            </if>
+            <if test="teacherid != null">
+                and teacherID = #{teacherid}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from classinfo
+        <where>
+            <if test="classid != null">
+                and classID = #{classid}
+            </if>
+            <if test="grade != null">
+                and grade = #{grade}
+            </if>
+            <if test="stuid != null">
+                and stuID = #{stuid}
+            </if>
+            <if test="teacherid != null">
+                and teacherID = #{teacherid}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="classid" useGeneratedKeys="true">
+        insert into classinfo(grade, teacherID)
+        values (#{grade}, #{teacherid})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="classid" useGeneratedKeys="true">
+        insert into classinfo(grade, teacherID)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.grade}, #{entity.teacherid})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="classid" useGeneratedKeys="true">
+        insert into classinfo(grade, teacherID)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.grade}, #{entity.teacherid})
+        </foreach>
+        on duplicate key update
+        grade = values(grade),
+        teacherID = values(teacherID)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update classinfo
+        <set>
+            <if test="grade != null">
+                grade = #{grade},
+            </if>
+            <if test="teacherid != null">
+                teacherID = #{teacherid},
+            </if>
+        </set>
+        where classID = #{classid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from classinfo where classID = #{classid}
+    </delete>
+
+</mapper>
+

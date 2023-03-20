@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit">
+    <title>管理员界面</title>
+    <link href="./bootstrap.min.css" rel="stylesheet"/>
+    <link href="./点击班级跳转页面.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="./layui-v2.6.8/layui-v2.6.8/layui/css/layui.css">
+</head>
+<body>
+<script src="./jquery/jquery-1.12.4.min.js"></script>
+<script src="./jquery/jquery.serializeObject.js"></script>
+<script src="./layui-v2.6.8/layui-v2.6.8/layui/layui.js"></script>
+
+<header id="nav-1" role="banner">
+  <div class="container">
+    <div class="header-inner">
+      <h1>
+        <img src="https://template-1253409072.cos.ap-guangzhou.myqcloud.com/2022/03/logo-small-svg.svg"  itemprop="logo" class="custom-logo"/>
+      </h1>
+      <nav role="navigation">
+        <ul>
+          <li>
+            <a href="./Manager.html">首页</a>
+          </li>
+          <li>
+            <button class="layui-btn layui-btn-primary demo1" id="downDropButton">
+              班级查看
+              <i class="layui-icon layui-icon-down layui-font-12"></i>
+            </button>
+          </li>
+          <li>
+            <a href="stuManage.html">学生管理</a>
+          </li>
+          <li>
+            <a href="courseManage.html">课程管理</a>
+          </li>
+          <li>
+            <a href="teacherInfoManage.html">教师管理</a>
+          </li>
+          <li>
+            <a href="giveNotice.html">发送通知</a>
+          </li>
+          <li>
+            <a href="applicationManage.html">批复申请</a>
+          </li>
+          <li>
+            <a href="http://localhost:8080/exit">退出登录</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<table class="layui-table" id="table"></table>
+
+
+<script>
+  function ReadCookie(cookie_name){
+        //判断是否存在cookie
+        if (document.cookie.length > 0){
+            //查询cookie开始部分
+            cookie_start = document.cookie.indexOf(cookie_name + "=")
+            //如果存在
+            if (cookie_start != -1){
+                //计算结束部分
+                cookie_start = cookie_start + cookie_name.length + 1
+                cookie_end = document.cookie.indexOf(";", cookie_start)
+                //如果已经是最后一个cookie值，则取cookie长度
+                if (cookie_end == -1) {
+                    cookie_end = document.cookie.length
+                }
+                //获取cookie值，unescape对特殊字符解密
+                return unescape(document.cookie.substring(cookie_start,cookie_end))
+            }
+        }
+        //其它情况返回空
+        return ""
+    }
+    var id = ReadCookie("classID");
+    console.log(id);
+    $.ajax({
+    type: "get",
+    url:"/showClassInfo",
+    data:{
+      classID: id
+    },
+    dataType:"json",
+    success:function(res){
+      var result = "<thead><tr><th>班级号</th><th>学生号</th><th>学生名</th></tr></thead>"
+      $.each(res,function(index,item){
+        result += "<tr><th>"+item['classID']+"</th><th>"+item['stuID']+"</th><th>"+item['stuName']+"</th></tr>";
+      })
+      $('#table').append(result)
+    },
+    error:function(){
+      alert("查询出错")
+    }
+  })
+</script>
+
+<script>
+    layui.use(['dropdown', 'util', 'layer', 'table'], function(){
+    var dropdown = layui.dropdown
+    ,util = layui.util
+    ,layer = layui.layer
+    ,table = layui.table
+    ,$ = layui.jquery;
+  
+      dropdown.render({
+        elem: '#downDropButton'
+        ,data: [{
+          title: '查看课程'
+          ,id: "course_check"
+          ,href:"./查看课程页面.html"
+        },{
+          title: '查看班级'
+          ,id: "room_check"
+          ,href: "./查看班级页面.html"
+        }]
+      });
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>批复申请</title>
+    <link href="./bootstrap.min.css" rel="stylesheet"/>
+    <link href="./点击申请跳转页面.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="./layui-v2.6.8/layui-v2.6.8/layui/css/layui.css">
+</head>
+<body>
+<script src="./jquery/jquery-1.12.4.min.js"></script>
+<script src="./jquery/jquery.serializeObject.js"></script>
+<script src="./layui-v2.6.8/layui-v2.6.8/layui/layui.js"></script>
+
+<header id="nav-1" role="banner">
+  <div class="container">
+    <div class="header-inner">
+      <h1>
+        <img src="https://template-1253409072.cos.ap-guangzhou.myqcloud.com/2022/03/logo-small-svg.svg"  itemprop="logo" class="custom-logo"/>
+      </h1>
+
+      <nav role="navigation">
+        <ul>
+          <li>
+            <a href="./Manager.html">首页</a>
+          </li>
+          <li>
+            <button class="layui-btn layui-btn-primary demo1" id="downDropButton">
+              班级/课程查看
+              <i class="layui-icon layui-icon-down layui-font-12"></i>
+            </button>
+          </li>
+          <li>
+            <a href="stuManage.html">学生管理</a>
+          </li>
+          <li>
+            <a href="courseManage.html">课程管理</a>
+          </li>
+          <li>
+            <a href="teacherInfoManage.html">教师管理</a>
+          </li>
+          <li>
+            <a href="giveNotice.html">发送通知</a>
+          </li>
+          <li>
+            <a href="applicationManage.html" id="response">批复申请</a>
+          </li>
+          <li>
+            <a href="http://localhost:8080/exit">退出登录</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="layui-row">
+  <div class="layui-col-xs12 layui-col-md6">
+    <div class="grid-demo grid-demo-bg1">
+      <ul class="layui-timeline" id="timeline"></ul>
+    </div>
+  </div>
+
+<div class="layui-col-xs12 layui-col-md6">
+    <form class="layui-form" name="submit_form" action="/showApplication" method="POST">
+      <div class="layui-form-item">
+        <label class="layui-form-label" id="approver">审批人:</label>
+        <div class="layui-input-inline" id="applicant_input">
+          <input type="text" name="approver" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label" id="approverTime">时间:</label>
+        <div class="layui-input-inline" id="time_input">
+          <input type="text" name="approvalTime" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+      </div>
+      <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label" id="approverTime">时间:</label>-->
+        <!--<div class="layui-input-inline" id="time_input">-->
+          <!--<input type="hidden" value="" name="approvalID" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">-->
+        <!--</div>-->
+      <!--</div>-->
+      <div class="layui-form-item" id="results">
+        <label class="layui-form-label" id="approvalResults">审批结果:</label>
+        <div class="layui-input-inline" id="time_input">
+          <input type="text" name="approvalResults" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-input-block" id="button">
+          <button type="submit" class="layui-btn" lay-submit="" id="submit_button">立即提交</button>
+          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  function ReadCookie(cookie_name){
+      //判断是否存在cookie
+      if (document.cookie.length > 0){
+          //查询cookie开始部分
+          cookie_start = document.cookie.indexOf(cookie_name + "=")
+          //如果存在
+          if (cookie_start != -1){
+              //计算结束部分
+              cookie_start = cookie_start + cookie_name.length + 1
+              cookie_end = document.cookie.indexOf(";", cookie_start)
+              //如果已经是最后一个cookie值，则取cookie长度
+              if (cookie_end == -1) {
+                  cookie_end = document.cookie.length
+              }
+              //获取cookie值，unescape对特殊字符解密
+              return unescape(document.cookie.substring(cookie_start,cookie_end))
+          }
+      }
+      //其它情况返回空
+      return ""
+  }
+  var applicationID = ReadCookie("applicationID");
+  console.log(applicationID);
+  $.ajax({
+    type:'get',
+    url: '/showAppInfo',
+    data:{
+      approvalID:applicationID
+    },
+    dataType:'json',
+    success:function(res){
+      var head = ''
+      $.each(res,function(index,item){
+        head += '<li class="layui-timeline-item"><i class="layui-icon layui-timeline-axis">&#xe63f;</i><div class="layui-timeline-content layui-text">'+'<h3 class="layui-timeline-title">'+"申请人："+item['applicantName']+'<br><br>'+'</h3>'+"<p id='applicantName'>"+"内容："+item['applicationContent']+"</p>"
+      })
+        console.log(head);
+      window.onload = function(){
+        document.getElementById("timeline").innerHTML = head;
+      }
+    },
+    error:function(){
+      alert("出错啦")
+    }
+  })
+</script>
+
+<script>
+    layui.use(['dropdown', 'util', 'layer', 'table'], function(){
+    var dropdown = layui.dropdown
+    ,util = layui.util
+    ,layer = layui.layer
+    ,table = layui.table
+    ,$ = layui.jquery;
+  
+      dropdown.render({
+        elem: '#downDropButton'
+        ,data: [{
+          title: '查看课程'
+          ,id: "course_check"
+          ,href:"./查看课程页面.html"
+        },{
+          title: '查看班级'
+          ,id: "room_check"
+          ,href: "./查看班级页面.html"
+        }]
+      });
+    })
+</script>
+
+
+</body>
+</html>

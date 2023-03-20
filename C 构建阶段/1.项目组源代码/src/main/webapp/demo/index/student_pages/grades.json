@@ -1,0 +1,30 @@
+[{
+      "courseID":810975,
+      "courseName":"数据结构",
+      "teacherName":"teacher11",
+      "score":95,
+      "courseCredit":5,
+      "GPA":4.0
+},
+{
+      "courseID":810975,
+      "courseName":"数据结构",
+      "teacherName":"teacher11",
+      "score":95,
+      "courseCredit":5,
+      "GPA":4.0
+},{
+      "courseID":810975,
+      "courseName":"数据结构",
+      "teacherName":"teacher11",
+      "score":95,
+      "courseCredit":5,
+      "GPA":4.0
+},{
+      "courseID":810975,
+      "courseName":"数据结构",
+      "teacherName":"teacher11",
+      "score":95,
+      "courseCredit":5,
+      "GPA":4.0
+}]

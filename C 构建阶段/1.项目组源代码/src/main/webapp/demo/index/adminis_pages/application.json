@@ -1,0 +1,40 @@
+[{
+    "applicationID":25,
+    "applicationTitle":"title1",
+    "applicationTime":"2022-9-6",
+    "applicant":"CHY",
+    "applicationContent":"this",
+    "approverState":"否"
+},
+{
+    "applicationID":26,
+    "applicationTitle":"title2",
+    "applicationTime":"2022-9-6",
+    "applicant":"CHY",
+    "applicationContent":"this is an application2 for testing the function",
+    "approverState":"否"
+},
+{
+    "applicationID":27,
+    "applicationTitle":"title3",
+    "applicationTime":"2022-9-6",
+    "applicant":"CHY",
+    "applicationContent":"this is an application3 for testing the function",
+    "approverState":"否"
+},
+{
+    "applicationID":28,
+    "applicationTitle":"title4",
+    "applicationTime":"2022-9-6",
+    "applicant":"CHY",
+    "applicationContent":"this is an application4 for testing the function",
+    "approverState":"否"
+},
+{
+    "applicationID":29,
+    "applicationTitle":"title",
+    "applicationTime":"2022-9-6",
+    "applicant":"CHY",
+    "applicationContent":"this is an application for testing the function",
+    "approverState":"否"
+}]

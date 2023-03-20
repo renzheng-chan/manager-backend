@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit">
+    <title>管理员界面</title>
+    <link href="./bootstrap.min.css" rel="stylesheet"/>
+    <link href="./Manager.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="./layui-v2.6.8/layui-v2.6.8/layui/css/layui.css">
+</head>
+<body>
+<script src="./jquery/jquery-1.12.4.min.js"></script>
+<script src="./jquery/jquery.serializeObject.js"></script>
+<script src="./layui-v2.6.8/layui-v2.6.8/layui/layui.js"></script>
+
+<header id="nav-1" role="banner">
+  <div class="container">
+    <div class="header-inner">
+      <h1>
+        <img src="https://template-1253409072.cos.ap-guangzhou.myqcloud.com/2022/03/logo-small-svg.svg"  itemprop="logo" class="custom-logo"/>
+      </h1>
+      <nav role="navigation">
+        <ul>
+          <li>
+            <button class="layui-btn layui-btn-primary demo1" id="downDropButton">
+              班级/课程查看
+              <i class="layui-icon layui-icon-down layui-font-12"></i>
+            </button>
+          </li>
+          <li>
+            <a href="stuManage.html">学生管理</a>
+          </li>
+          <li>
+            <a href="courseManage.html">课程管理</a>
+          </li>
+          <li>
+            <a href="teacherInfoManage.html">教师管理</a>
+          </li>
+          <li>
+            <a href="giveNotice.html">发送通知</a>
+          </li>
+          <li>
+            <a href="applicationManage.html">批复申请</a>
+          </li>
+          <li>
+            <a href="http://localhost:8080/exit">退出登录</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+<section data-block-type="contents" data-id="3" draggable="true" class="fdb-block">
+    <div class="col-fill-left" id="imvmb">
+    </div>
+    <div class="container">
+      <div class="row justify-content-end">
+        <div class="col-12 col-md-5 text-center">
+          <h1 id="idykv">
+            管理员操作界面
+          </h1>
+          <p class="text-h3"></p>
+            管理员可以在该界面实现查看班级、查看课程、学生管理、课程管理、教师管理、发送通知、批复申请的功能。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+<script>
+    layui.use(['dropdown', 'util', 'layer', 'table'], function(){
+    var dropdown = layui.dropdown
+    ,util = layui.util
+    ,layer = layui.layer
+    ,table = layui.table
+    ,$ = layui.jquery;
+  
+      dropdown.render({
+        elem: '#downDropButton'
+        ,data: [{
+          title: '查看课程'
+          ,id: "course_check"
+          ,href:"./查看课程页面.html"
+        },{
+          title: '查看班级'
+          ,id: "room_check"
+          ,href: "./查看班级页面.html"
+        }]
+      });
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间 对应dao层的名称/完整限定名-->
+<mapper namespace="course">
+    <!--测试环境配置-->
+    <select id="getCourseByID" resultType="Course">
+        select * from course where courseID = #{courseID}
+    </select>
+    <!--查询所有-->
+    <select id="selectAllCourse" resultType="com.scu.Entity.ManagerEntity.TeacherCourse">
+        select courseID,courseName,teacherID, courseCredit,courseRoom,courseTime, courseDescription from course;
+    </select>
+    <!--新增教师和对应课表-->
+    <insert id="uploadCourse">
+        insert into course(courseID,courseName,teacherID,courseCredit,courseRoom,courseTime,courseDescription) values(#{courseID}, #{courseName},#{teacherID},#{courseCredit},#{courseRoom},#{courseTime},#{courseDescription})
+    </insert>
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间 对应dao层的名称/完整限定名-->
+<mapper namespace="com.scu.Dao.ManagerDao.CRZDao">
+
+    <insert id="uploadStu" parameterType="com.scu.Entity.ManagerEntity.CRZEntity.Student">
+insert into student values(#{stuID},#{stuName},#{stuSex},#{stuAge},#{stuGrade},#{stuClass},#{stuDept},#{stuADTime});
+    </insert>
+    <insert id="sendNote" parameterType="com.scu.Entity.ManagerEntity.CRZEntity.Notification">
+insert into notice(noticeInfo, noticeTime, noticeTitle, notifier) values (#{noticeInfo},#{noticeTime},#{noticeTitle},#{notifier});
+    </insert>
+    <select id="queryApplication" resultType="com.scu.Entity.ManagerEntity.CRZEntity.Application">
+         select * from approval;
+    </select>
+    <update id="updateApplication">
+        update approval set approvalResults = #{approvalResults},approver = #{approver},approvalState="已处理",approvalTime=#{approvalTime} where applicantID = #{applicantID};
+    </update>
+    <select id="queryApplicationByID" resultType="com.scu.Entity.ManagerEntity.CRZEntity.Application">
+        select * from approval where approvalID = #{applicationID};
+    </select>
+    <select id="getClassByID" resultType="com.scu.Entity.ManagerEntity.CRZEntity.Student">
+        select * from student where class = #{class};
+    </select>
+
+    <resultMap id="classInfo" type="com.scu.Entity.ManagerEntity.CRZEntity.ClassInfo">
+        <id column="stuNumber" property="stuNumber"/>
+        <result column="stuClass" property="classID"/>
+        <result column="stuDept" property="Dept"/>
+        <result column="stuGrade" property="Grade"/>
+    </resultMap>
+    <select id="showClass" resultMap="classInfo">
+        select classID,stuDept,stuGrade,COUNT(classID) as stuNumber from student group by classID,stuGrade;
+    </select>
+</mapper>

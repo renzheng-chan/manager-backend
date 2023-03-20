@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scu.com.demo.dao.ScoreDao">
+
+    <resultMap type="scu.com.demo.entity.Score" id="ScoreMap">
+        <result property="courseid" column="courseID" jdbcType="INTEGER"/>
+        <result property="score" column="score" jdbcType="INTEGER"/>
+        <result property="teacherid" column="teacherID" jdbcType="INTEGER"/>
+        <result property="stuid" column="stuID" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="getStuScore" resultType="scu.com.demo.entity.Score">
+        select * from score where courseID=#{courseid} and teacherID=#{teacherid}
+    </select>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ScoreMap">
+        select
+          courseID, score, teacherID, stuID
+        from score
+        where courseID = #{courseid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ScoreMap">
+        select
+          courseID, score, teacherID, stuID
+        from score
+        <where>
+            <if test="courseid != null">
+                and courseID = #{courseid}
+            </if>
+            <if test="score != null">
+                and score = #{score}
+            </if>
+            <if test="teacherid != null">
+                and teacherID = #{teacherid}
+            </if>
+            <if test="stuid != null">
+                and stuID = #{stuid}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from score
+        <where>
+            <if test="courseid != null">
+                and courseID = #{courseid}
+            </if>
+            <if test="score != null">
+                and score = #{score}
+            </if>
+            <if test="teacherid != null">
+                and teacherID = #{teacherid}
+            </if>
+            <if test="stuid != null">
+                and stuID = #{stuid}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="courseid" useGeneratedKeys="true">
+        insert into score(score, teacherID)
+        values (#{score}, #{teacherid})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="courseid" useGeneratedKeys="true">
+        insert into score(score, teacherID)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.score}, #{entity.teacherid})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="courseid" useGeneratedKeys="true">
+        insert into score(score, teacherID)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.score}, #{entity.teacherid})
+        </foreach>
+        on duplicate key update
+        score = values(score),
+        teacherID = values(teacherID)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update score
+        <set>
+            <if test="score != null">
+                score = #{score},
+            </if>
+            <if test="teacherid != null">
+                teacherID = #{teacherid},
+            </if>
+        </set>
+        where courseID = #{courseid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from score where courseID = #{courseid}
+    </delete>
+
+</mapper>
+

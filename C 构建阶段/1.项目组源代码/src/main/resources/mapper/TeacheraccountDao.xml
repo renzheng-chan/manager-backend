@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scu.com.demo.dao.TeacheraccountDao">
+
+    <resultMap type="scu.com.demo.entity.Teacheraccount" id="TeacheraccountMap">
+        <result property="teacherid" column="teacherID" jdbcType="INTEGER"/>
+        <result property="account" column="account" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TeacheraccountMap">
+        select
+          teacherID, account
+        from teacheraccount
+        where teacherID = #{teacherid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TeacheraccountMap">
+        select
+          teacherID, account
+        from teacheraccount
+        <where>
+            <if test="teacherid != null">
+                and teacherID = #{teacherid}
+            </if>
+            <if test="account != null">
+                and account = #{account}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from teacheraccount
+        <where>
+            <if test="teacherid != null">
+                and teacherID = #{teacherid}
+            </if>
+            <if test="account != null">
+                and account = #{account}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="teacherid" useGeneratedKeys="true">
+        insert into teacheraccount(account)
+        values (#{account})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="teacherid" useGeneratedKeys="true">
+        insert into teacheraccount(account)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.account})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="teacherid" useGeneratedKeys="true">
+        insert into teacheraccount(account)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.account})
+        </foreach>
+        on duplicate key update
+        account = values(account)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update teacheraccount
+        <set>
+            <if test="account != null">
+                account = #{account},
+            </if>
+        </set>
+        where teacherID = #{teacherid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from teacheraccount where teacherID = #{teacherid}
+    </delete>
+
+</mapper>
+

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>课程管理</title>
+    <link href="./bootstrap.min.css" rel="stylesheet"/>
+    <link href="./课程管理页面.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="./layui-v2.6.8/layui-v2.6.8/layui/css/layui.css">
+</head>
+<body>
+<script src="./jquery/jquery.serializeObject.js"></script>
+<script src="./jquery/jquery-1.12.4.min.js"></script>
+<script src="./layui-v2.6.8/layui-v2.6.8/layui/layui.js"></script>
+<header id="nav-1" role="banner">
+  <div class="container">
+    <div class="header-inner">
+      <h1>
+        <img src="https://template-1253409072.cos.ap-guangzhou.myqcloud.com/2022/03/logo-small-svg.svg"  itemprop="logo" class="custom-logo"/>
+      </h1>
+
+      <nav role="navigation">
+        <ul>
+          <li>
+            <a href="./Manager.html">首页</a>
+          </li>
+          <li>
+            <button class="layui-btn layui-btn-primary demo1" id="downDropButton">
+              班级/课程查看
+              <i class="layui-icon layui-icon-down layui-font-12"></i>
+            </button>
+          </li>
+          <li>
+            <a href="stuManage.html">学生管理</a>
+          </li>
+          <li>
+            <a href="./courseManage.html" id="course_manage">课程管理</a>
+          </li>
+          <li>
+            <a href="teacherInfoManage.html">教师管理</a>
+          </li>
+          <li>
+            <a href="giveNotice.html">发送通知</a>
+          </li>
+          <li>
+            <a href="applicationManage.html">批复申请</a>
+          </li>
+          <li>
+            <a href="http://localhost:8080/exit">退出登录</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="layui-row">
+    <div class="layui-col-xs12 layui-col-md6">
+      <div id="main_body_left">
+        <img src="./images/铁驭.png" alt="">
+      </div>
+    </div>
+
+<div class="layui-col-xs12 layui-col-md6">
+  <div id="main_body_right">
+      <form class="layui-form" name="submit_form" action="/uploadCourse" method="POST">
+        <div class="layui-form-item" id="TID">
+          <label class="layui-form-label" id="teacherID">教师编号:</label>
+          <div class="layui-input-inline" id="TIDInput">
+            <input type="text" name="teacherID" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item" id="CID">
+          <label class="layui-form-label" id="courseID">课程ID:</label>
+          <div class="layui-input-inline" id="CIDInput">
+            <input type="text" name="courseID" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label" id="courseName">课程名:</label>
+          <div class="layui-input-inline" id="CnameInput">
+            <input type="text" name="courseName" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item" id="Ctime">
+          <label class="layui-form-label" id="courseTime">上课时间:</label>
+          <div class="layui-input-inline" id="timeInput">
+            <input type="text" name="courseTime" lay-verify="required" placeholder="格式为：星期xx第xx节" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item" id = "credit">
+          <label class="layui-form-label" id="courseCredit">课程学分:</label>
+          <div class="layui-input-inline" id="creditInput">
+            <input type="text" name="courseCredit" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item" id="room">
+          <label class="layui-form-label" id="courseRoom">上课教室:</label>
+          <div class="layui-input-inline" id="roomInput">
+            <input type="text" name="courseRoom" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item layui-form-text" id="desc">
+          <label class="layui-form-label" id="courseDescription">课程描述:</label>
+          <div class="layui-input-block" id="descriptionInput">
+            <textarea name="courseDescription" placeholder="请输入内容" class="layui-textarea" id="textArea"></textarea>
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-block" id="button">
+            <button type="submit" class="layui-btn" lay-submit="" id="submit_button">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+  
+<script>
+    layui.use(['dropdown', 'util', 'layer', 'table'], function(){
+    var dropdown = layui.dropdown
+    ,util = layui.util
+    ,layer = layui.layer
+    ,table = layui.table
+    ,$ = layui.jquery;
+  
+      dropdown.render({
+        elem: '#downDropButton'
+        ,data: [{
+          title: '查看课程'
+          ,id: "course_check"
+          ,href:"./查看课程页面.html"
+        },{
+          title: '查看班级'
+          ,id: "room_check"
+          ,href: "./查看班级页面.html"
+        }]
+      });
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>退出登录</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript" src="../static/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../static/jquery.serializeObject.js"></script>
+<script type="text/javascript">
+    $(function () {
+        testGet();
+    })
+    function testGet(){
+        $.get("/servlet.do",
+            {opt:"logout"},
+            function(res){
+                var jsons = new Function("return " + res)();
+                //var jsons = JSON.parse(res);
+                testPrint(jsons);
+            });
+    }
+</script>
+</html>

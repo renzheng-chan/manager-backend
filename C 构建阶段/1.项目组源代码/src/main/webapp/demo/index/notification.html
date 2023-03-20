@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type = "text/css" rel="stylesheet" href="./layui/css/layui.css">
+  <link rel="stylesheet" href="./css/info.css">
+  <title>Document</title>
+</head>
+<body>
+    <fieldset class="layui-elem-field">
+
+   <div style="text-align: center;">
+        <li class="layui-timeline-item">
+          <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+          <div class="layui-timeline-content layui-text">
+            <h3 id = "noticeTitle" class="layui-timeline-title">呜呜呜呜</h3>
+            <p id = "noticeTime">时间</p>
+              
+              <div id = "noticeInfo">不枉近百个日日夜夜与之为伴。因小而大，因弱而强。</div>
+              <div id = "notifier">黄拓森</div> <i class="layui-icon"></i>
+            
+          </div>
+        </li>
+    
+
+    </div>
+
+    <div style="text-align: center;">
+      <li class="layui-timeline-item">
+        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+        <div class="layui-timeline-content layui-text">
+          <h3 id = "noticeTitle1" class="layui-timeline-title"></h3>
+          <p id = "noticeTime1"></p>
+            
+            <div id = "noticeInfo1"></div>
+            <div id = "notifier1"></div> <i class="layui-icon"></i>
+          
+        </div>
+
+    <div style="text-align: center;">
+        <li class="layui-timeline-item">
+          <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+          <div class="layui-timeline-content layui-text">
+            <h3 id = "noticeTitle2" class="layui-timeline-title"></h3>
+            <p id = "noticeTime2"></p>
+              
+              <div id = "noticeInfo2"></div>
+              <div id = "notifier2"></div> <i class="layui-icon"></i>
+            
+          </div>
+        </li>
+    
+
+    </div>
+
+    <div style="text-align: center;">
+      <li class="layui-timeline-item">
+        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+        <div class="layui-timeline-content layui-text">
+          <h3 id = "noticeTitle3" class="layui-timeline-title"></h3>
+          <p id = "noticeTime3"></p>
+            
+            <div id = "noticeInfo3"></div>
+            <div id = "notifier3"></div> <i class="layui-icon"></i>
+          
+        </div>
+      </li>
+  
+
+  </div>
+      </li>
+  
+
+  </div>
+    </fieldset>
+
+  <script src="./layui/layui.js"></script>
+    <script type="text/javascript" src="JQUERY/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="JQUERY/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="JQUERY/jquery.serializeObject.js"></script>
+
+    <script>
+      
+      
+
+
+
+      
+
+ 
+        
+
+    $.ajax({
+      url:"/teacherservlet.do",
+      dataType:"json",
+      type:"post",
+      data: {opt:"getNotice"},
+      success: function(list) {
+        if (list != null) {
+          alert("111");
+         
+      var div1 = document.getElementById("noticeTitle");
+      var div2 = document.getElementById("noticeTime");
+      var div3 = document.getElementById("noticeInfo");
+      var div4 = document.getElementById("notifier");
+
+      var div5 = document.getElementById("noticeTitle1");
+      var div6 = document.getElementById("noticeTime1");
+      var div7 = document.getElementById("noticeInfo1");
+      var div8 = document.getElementById("notifier1");
+
+      var div9 = document.getElementById("noticeTitle2");
+      var div10 = document.getElementById("noticeTime2");
+      var div11 = document.getElementById("noticeInfo2");
+      var div12 = document.getElementById("notifier2");
+
+      var div13 = document.getElementById("noticeTitle3");
+      var div14 = document.getElementById("noticeTime3");
+      var div15 = document.getElementById("noticeInfo3");
+      var div16 = document.getElementById("notifier3");
+
+      var teacherID = list[0].noticetitle;
+      var teacherName = list[0].noticeinfo;
+      var teacherAge = list[0].noticetime;
+      var teacherSex = list[0].notifier;
+      
+        
+      div1.innerText = teacherID;
+      div2.innerText = teacherName;
+      div3.innerText = teacherAge;
+      div4.innerText = teacherSex;
+      
+       teacherID = list[1].noticetitle;
+       teacherName = list[1].noticeinfo;
+       teacherAge = list[1].noticetime;
+       teacherSex = list[1].notifier;
+
+      div5.innerText = teacherID;
+      div6.innerText = teacherName;
+      div7.innerText = teacherAge;
+      div8.innerText = teacherSex;
+
+       teacherID = list[2].noticetitle;
+       teacherName = list[2].noticeinfo;
+       teacherAge = list[2].noticetime;
+       teacherSex = list[2].notifier;
+
+      div9.innerText = teacherID;
+      div10.innerText = teacherName;
+      div11.innerText = teacherAge;
+      div12.innerText = teacherSex;
+
+       teacherID = list[3].noticetitle;
+       teacherName = list[3].noticeinfo;
+       teacherAge = list[3].noticetime;
+       teacherSex = list[3].notifier;
+
+      div13.innerText = teacherID;
+      div14.innerText = teacherName;
+      div15.innerText = teacherAge;
+      div16.innerText = teacherSex;
+        }
+      
+    },
+      error: function(){
+        alert("传入失败！");
+    }
+  })
+
+
+
+</script>
+</body>
+</html>
